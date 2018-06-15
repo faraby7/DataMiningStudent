@@ -1,0 +1,87 @@
+[Diagram]
+Title=Default title
+Database=C:\Users\Faraby\Desktop\data.txt
+
+[Dataset]
+MLClassGenerator=TMLGenDataset
+successors=1
+succ_1=View dataset 1
+
+[View dataset 1]
+MLClassGenerator=TMLGenCompViewData
+successors=1
+succ_1=Define status 1
+
+[Define status 1]
+MLClassGenerator=TMLGenFSDefStatus
+target_count=1
+target_1=Class
+input_count=16
+input_1=gender
+input_2=NationalITy
+input_3=PlaceofBirth
+input_4=StageID
+input_5=GradeID
+input_6=SectionID
+input_7=Topic
+input_8=Semester
+input_9=Relation
+input_10=raisedhands
+input_11=VisITedResources
+input_12=AnnouncementsView
+input_13=Discussion
+input_14=ParentAnsweringSurvey
+input_15=ParentschoolSatisfaction
+input_16=StudentAbsenceDays
+illus_count=0
+successors=2
+succ_1=Supervised Learning 1 (K-NN)
+succ_2=Supervised Learning 2 (ID3)
+
+[Supervised Learning 1 (K-NN)]
+MLClassGenerator=TMLGCompOneInstance
+embedded_spv=1
+embedded_section=Supervised Learning 1 (K-NN)--K-NN
+successors=2
+succ_1=Train-test 1
+succ_2=View dataset 2
+
+[Supervised Learning 1 (K-NN)--K-NN]
+MLClassGenerator=TMLGCompKNN
+neighbors=20
+dist_normalization=0
+
+[Train-test 1]
+MLClassGenerator=TMLGenCompAssesTrainTest
+isSaveResults=0
+results_filename=C:\Program Files (x86)\Tanagra\experiments_results.txt
+train_proportion=0.800000011920929
+nb_repetitions=5
+successors=0
+
+[View dataset 2]
+MLClassGenerator=TMLGenCompViewData
+successors=0
+
+[Supervised Learning 2 (ID3)]
+MLClassGenerator=TMLGCompOneInstance
+embedded_spv=1
+embedded_section=Supervised Learning 2 (ID3)--ID3
+successors=1
+succ_1=Train-test 2
+
+[Supervised Learning 2 (ID3)--ID3]
+MLClassGenerator=TMLGCompSpvTree
+SizeBeforeSplit=20
+SizeAfterSplit=3
+GoodnessThresold=0.03
+MaxDepth=16
+
+[Train-test 2]
+MLClassGenerator=TMLGenCompAssesTrainTest
+isSaveResults=0
+results_filename=C:\Program Files (x86)\Tanagra\experiments_results.txt
+train_proportion=0.699999988079071
+nb_repetitions=1
+successors=0
+
